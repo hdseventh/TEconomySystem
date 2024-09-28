@@ -2,8 +2,6 @@
 using System.Text;
 using System.Data;
 using TShockAPI;
-using MonoMod;
-using System.Collections.Generic;
 
 namespace TEconomySystem
 {
