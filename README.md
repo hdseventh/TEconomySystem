@@ -1,6 +1,6 @@
 ### TEconomySystem
 A simple economy system for tshock.
-###### WARNING! THIS PLUGIN IS FUNCTIONAL BUT NOT YET FINISHED. USE AT YOUR OWN RISK!
+###### 
 #### Commands
 |  Name | Commands  | Permission  |
 | ------------ | ------------ | ------------ |
