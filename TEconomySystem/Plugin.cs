@@ -22,7 +22,7 @@ namespace TEconomySystem
             ConfigManager.LoadConfig();
             TDatabaseManager.Initialize();
 
-            Commands.ChatCommands.Add(new Command("economy.use", EconomyMain, "boks", "eco"));
+            Commands.ChatCommands.Add(new Command("economy.use", EconomyMain, "eco"));
         }
 
         public static void EconomyMain(CommandArgs args)
@@ -43,6 +43,14 @@ namespace TEconomySystem
                 case "balance":
                 case "bal":
                     TCommands.Balance(args);
+                    break;
+                case "systembal":
+                    if (args.Player.HasPermission("economy.manage"))
+                    {
+                        TCommands.SystemBalance(args);
+                        break;
+                    }
+                    args.Player.SendErrorMessage("You do not have permission to use this command.");
                     break;
                 case "deposit":
                 case "dep":

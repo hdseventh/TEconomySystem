@@ -13,14 +13,14 @@ namespace TEconomySystem
         {
             var player = args.Player;
             var balance = await GetBalanceAsync(player.Name);
-            player.SendInfoMessage($"Your current balance is: {balance} Boks");
+            player.SendInfoMessage($"Your current balance is: {balance} {ConfigManager.ConfigData.Economyname}");
         }
 
         public static async void SystemBalance(CommandArgs args)
         {
             var player = args.Player;
             var balance = await GetBalanceAsync("system");
-            player.SendInfoMessage($"System current balance is: {balance} Boks");
+            player.SendInfoMessage($"System current balance is: {balance} {ConfigManager.ConfigData.Economyname}");
         }
 
         public static async void Deposit(CommandArgs args)
@@ -41,7 +41,7 @@ namespace TEconomySystem
 
             await AdjustBalanceAsync(targetUser, amount);
             await LogTransactionAsync(targetUser, "deposit", amount, targetUser);
-            player.SendSuccessMessage($"Deposited {amount} Boks to {targetUser}'s account.");
+            player.SendSuccessMessage($"Deposited {amount} {ConfigManager.ConfigData.Economyname} to {targetUser}'s account.");
         }
 
         public static async void Withdraw(CommandArgs args)
@@ -69,7 +69,7 @@ namespace TEconomySystem
 
             await AdjustBalanceAsync(targetUser, -amount);
             await LogTransactionAsync(player.Name, "withdrawal", amount, targetUser);
-            player.SendSuccessMessage($"Withdrew {amount} Boks from {targetUser}'s account.");
+            player.SendSuccessMessage($"Withdrew {amount} {ConfigManager.ConfigData.Economyname} from {targetUser}'s account.");
         }
 
         public static async void Transfer(CommandArgs args)
@@ -116,7 +116,7 @@ namespace TEconomySystem
             await LogTransactionAsync(player.Name, "transfer", amountAfterTax, targetUser);
             await LogTransactionAsync(player.Name, "tax", taxAmount, "system"); // Log tax transaction
 
-            player.SendSuccessMessage($"Transferred {amountAfterTax} Boks to {targetUser}. Tax deducted: {taxAmount} Boks.");
+            player.SendSuccessMessage($"Transferred {amountAfterTax} {ConfigManager.ConfigData.Economyname} to {targetUser}. Tax deducted: {taxAmount} {ConfigManager.ConfigData.Economyname}.");
         }
 
 
@@ -129,7 +129,7 @@ namespace TEconomySystem
             foreach (var entry in leaderboard)
             {
                 if(rank == 10 ) break;
-                player.SendInfoMessage($"{entry.Username}: {entry.Balance} Boks");
+                player.SendInfoMessage($"{entry.Username}: {entry.Balance} {ConfigManager.ConfigData.Economyname}");
                 rank++;
             }
         }
