@@ -33,7 +33,7 @@ namespace TEconomySystem
             )";
             ExecuteNonQuery(createTransactionTableQuery);
 
-            string createSystemAccountQuery = "INSERT IGNORE INTO users (username, balance) VALUES (system, 0.00)";
+            string createSystemAccountQuery = "INSERT IGNORE INTO users (username, balance) VALUES ('system', 0.00)";
             ExecuteNonQuery(createSystemAccountQuery);
         }
 
