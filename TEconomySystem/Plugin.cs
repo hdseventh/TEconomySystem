@@ -10,7 +10,7 @@ namespace TEconomySystem
         public override string Name => "TEconomySystem";
         public override string Author => "hdseventh";
         public override string Description => "A simple economy system for tshock";
-        public override Version Version => new Version(0, 1, 0);
+        public override Version Version => new Version(1, 0, 0);
 
         public TEconomySystem(Main game) : base(game)
         {
