@@ -19,9 +19,10 @@ namespace TEconomySystem
 
         public override void Initialize()
         {
-            Commands.ChatCommands.Add(new Command("economy.use", EconomyMain, "boks", "eco"));
-
+            ConfigManager.LoadConfig();
             TDatabaseManager.Initialize();
+
+            Commands.ChatCommands.Add(new Command("economy.use", EconomyMain, "boks", "eco"));
         }
 
         public static void EconomyMain(CommandArgs args)

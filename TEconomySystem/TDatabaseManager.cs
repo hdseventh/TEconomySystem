@@ -7,7 +7,7 @@ namespace TEconomySystem
     public static class TDatabaseManager
     {
         private static MySqlConnection connection;
-        private static string connectionString = "server=localhost;user=root;database=teconomy;port=3306;password=";
+        static string connectionString = ConfigManager.ConfigData.ConnectionString;
 
         public static void Initialize()
         {
