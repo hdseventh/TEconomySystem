@@ -2,6 +2,8 @@
 using System.Text;
 using System.Data;
 using TShockAPI;
+using Terraria;
+using System.Drawing;
 
 namespace TEconomySystem
 {
@@ -132,7 +134,7 @@ namespace TEconomySystem
             }
         }
 
-        private static async Task<decimal> GetBalanceAsync(string username)
+        public static async Task<decimal> GetBalanceAsync(string username)
         {
             string query = "SELECT balance FROM users WHERE username = @username";
             var parameter = new MySqlParameter("@username", MySqlDbType.VarChar) { Value = username };
@@ -150,7 +152,7 @@ namespace TEconomySystem
             }
         }
 
-        private static async Task AdjustBalanceAsync(string username, decimal amount)
+        public static async Task AdjustBalanceAsync(string username, decimal amount)
         {
             string query = "UPDATE users SET balance = balance + @amount WHERE username = @username";
             var parameters = new[]
