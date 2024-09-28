@@ -24,7 +24,7 @@ namespace TEconomySystem
             string createTransactionTableQuery = @"CREATE TABLE IF NOT EXISTS transactions (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 user_id INT NOT NULL,
-                type ENUM('deposit', 'withdrawal', 'transfer') NOT NULL,
+                type ENUM('deposit', 'withdrawal', 'transfer', 'tax') NOT NULL,
                 amount DECIMAL(10, 2) NOT NULL,
                 target_user_id INT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
