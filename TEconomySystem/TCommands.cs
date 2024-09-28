@@ -16,6 +16,13 @@ namespace TEconomySystem
             player.SendInfoMessage($"Your current balance is: {balance} Boks");
         }
 
+        public static async void SystemBalance(CommandArgs args)
+        {
+            var player = args.Player;
+            var balance = await GetBalanceAsync("system");
+            player.SendInfoMessage($"System current balance is: {balance} Boks");
+        }
+
         public static async void Deposit(CommandArgs args)
         {
             var player = args.Player;
@@ -88,11 +95,30 @@ namespace TEconomySystem
                 return;
             }
 
+            // Calculate the tax based on the configured tax rate
+            decimal taxRate = ConfigManager.ConfigData.TaxRate;
+            decimal taxAmount = amount * taxRate;
+            decimal amountAfterTax = amount - taxAmount;
+
+            if (balance < amountAfterTax)
+            {
+                player.SendErrorMessage("Insufficient funds after applying tax.");
+                return;
+            }
+
+            // Apply the transfer with tax deduction
             await AdjustBalanceAsync(player.Name, -amount);
-            await AdjustBalanceAsync(targetUser, amount);
-            await LogTransactionAsync(player.Name, "transfer", amount, targetUser);
-            player.SendSuccessMessage($"Transferred {amount} Boks to {targetUser}.");
+            await AdjustBalanceAsync(targetUser, amountAfterTax);
+
+            // Deposit tax into the system account
+            await AdjustBalanceAsync("system", taxAmount);
+
+            await LogTransactionAsync(player.Name, "transfer", amountAfterTax, targetUser);
+            await LogTransactionAsync(player.Name, "tax", taxAmount, "system"); // Log tax transaction
+
+            player.SendSuccessMessage($"Transferred {amountAfterTax} Boks to {targetUser}. Tax deducted: {taxAmount} Boks.");
         }
+
 
         public static async void Leaderboard(CommandArgs args)
         {

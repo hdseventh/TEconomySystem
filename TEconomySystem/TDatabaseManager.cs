@@ -32,6 +32,9 @@ namespace TEconomySystem
                 FOREIGN KEY (target_user_id) REFERENCES users(id)
             )";
             ExecuteNonQuery(createTransactionTableQuery);
+
+            string createSystemAccountQuery = "INSERT IGNORE INTO users (username, balance) VALUES (system, 0.00)";
+            ExecuteNonQuery(createSystemAccountQuery);
         }
 
         public static void Dispose()

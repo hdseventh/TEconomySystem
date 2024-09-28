@@ -6,6 +6,7 @@ namespace TEconomySystem
     public class Config
     {
         public string ConnectionString { get; set; } = "server=localhost;user=root;database=teconomy;port=3306;password=your_password";
+        public decimal TaxRate { get; set; } = 0.05m;
     }
 
     public static class ConfigManager
